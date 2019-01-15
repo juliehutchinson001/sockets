@@ -12,4 +12,12 @@ const server = http.createServer(app)
 const io = socketIO(server);
 const port = process.env.PORT || 3000;
 
+io.on('connection', socket => {
+  console.log('user connected!');
+
+  socket.on('disconnect', () => {
+    console.log('client disconnected');
+  });
+});
+
 server.listen(port, () => console.log(`Server listening on port ${port}`));
