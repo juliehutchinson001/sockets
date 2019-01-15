@@ -4,7 +4,8 @@
   "description": "learn socket with node and a front-end app",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js",
+    "test": "jest --watch --expand --verbose"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,27 @@
   "bugs": {
     "url": "https://github.com/juliehutchinson001/sockets/issues"
   },
-  "homepage": "https://github.com/juliehutchinson001/sockets#readme"
+  "homepage": "https://github.com/juliehutchinson001/sockets#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.4.3",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.3",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.9",
+    "prettier": "1.15.3",
+    "supertest": "^3.3.0"
+  }
 }
