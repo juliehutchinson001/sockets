@@ -4,9 +4,10 @@
   "description": "learn socket with node and a front-end app",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "test": "jest --watch --expand --verbose"
   },
+  "engines": { "node": "10.10.0" },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/juliehutchinson001/sockets.git"
