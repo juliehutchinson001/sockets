@@ -4,7 +4,7 @@
   "description": "learn socket with node and a front-end app",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "test": "jest --watch --expand --verbose"
   },
   "engines": {
