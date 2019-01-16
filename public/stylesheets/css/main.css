@@ -1,0 +1,20 @@
+.app {
+  background-color: #915353;
+  height: 100vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }
+
+.app-text {
+  font-size: 32px; }
+
+input {
+  font-size: 32px;
+  border-radius: 5px;
+  margin-bottom: 16px; }
+
+button {
+  font-size: 16px;
+  border-radius: 5px; }
