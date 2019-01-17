@@ -16,59 +16,23 @@ const port = process.env.PORT || 3000;
 io.on('connection', socket => {
   console.log('client connected!');
 
-  // socket.on('asdfadsfsadfsadfasdffdasdfasdfasfasd', newEmail => {
-  //   console.log(newEmail);
-  // });
-
-
-
-  setInterval(() => {
-    socket.emit('newMessage', 'Message from server');
-  }, 3000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //server creating custom event
-  //the data is being sent from the server to the client
-  // socket.emit('newEmail', {
-  //   from: 'julie.hutchinson001@outlook.com',
-  //   text: 'this is a new email',
-  //   createAt: new Date,
-  // });
-
-  // socket.emit('createMessage', {
-  //   from: 'julie.hutchinson001@outlook.com',
-  //   text: 'new message sent!',
-  //   createAt: new Date,
-  // });
-
-
-
-  // socket.emit('newMessage', {
-  //   from: 'Julie',
-  //   text: 'see you then!',
-  //   createAt: new Date,
-  // });
+  // setInterval(() => socket.emit('newMessage', 'Message from server'), 3000);
 
   //server losing connection of the client
-  socket.on('disconnect', () => {
-    console.log('client disconnected');
-  });
+  socket.on('disconnect', () => console.log('client disconnected'));
 
-  // socket.on('createMessage', newMessage => {
-  //   console.log(newMessage);
-  // });
+  socket.on('newblah', newMessage => {
+    console.log(newMessage);
+    io.emit('newMessage', {
+      from: newMessage.from,
+      text: newMessage.text,
+      createdAt: new Date(),
+    });
+  });
 });
 
+socket.on('createEmail', newMessage => {
+  console.log(newMessage);
+});
 
 server.listen(port, () => console.log(`Server listening on port ${port}`));
