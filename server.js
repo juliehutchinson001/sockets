@@ -23,16 +23,18 @@ io.on('connection', socket => {
 
   socket.on('newblah', newMessage => {
     console.log(newMessage);
+
     io.emit('newMessage', {
       from: newMessage.from,
       text: newMessage.text,
       createdAt: new Date(),
     });
   });
+
+  socket.on('createEmail', newMessage => {
+    console.log(newMessage);
+  });
 });
 
-socket.on('createEmail', newMessage => {
-  console.log(newMessage);
-});
 
 server.listen(port, () => console.log(`Server listening on port ${port}`));
