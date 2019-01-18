@@ -16,25 +16,26 @@ const port = process.env.PORT || 3000;
 io.on('connection', socket => {
   console.log('client connected!');
 
-  // setInterval(() => socket.emit('newMessage', 'Message from server'), 3000);
+  //server emitting a message to an specific client
+  io.emit('newMessage', {
+    from: 'Admin',
+    text: 'Welcome to the chat app',
+    createdAt: new Date(),
+  });
 
-  //server losing connection of the client
-  socket.on('disconnect', () => console.log('client disconnected'));
-
-  socket.on('newblah', newMessage => {
-    console.log(newMessage);
-
-    io.emit('newMessage', {
-      from: newMessage.from,
-      text: newMessage.text,
-      createdAt: new Date(),
-    });
+  //server transmitting a message to all clients except the one who caused this action
+  socket.broadcast.emit('newMessage', {
+    from: 'Admin',
+    text: 'New user has signed in',
+    createdAt: new Date(),
   });
 
   socket.on('createEmail', newMessage => {
     console.log(newMessage);
   });
-});
 
+  //server losing connection of the client
+  socket.on('disconnect', () => console.log('client disconnected'));
+});
 
 server.listen(port, () => console.log(`Server listening on port ${port}`));
