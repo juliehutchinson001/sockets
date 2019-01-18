@@ -5,10 +5,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column; }
+  flex-direction: column;
+}
 
 .app-text {
-  font-size: 32px; }
+  font-size: 32px;
+}
+.app-response {
+  font-size: 20px;
+}
+
+.app-alert {
+  font-size: 32px;
+}
 
 input {
   font-size: 32px;

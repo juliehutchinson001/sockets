@@ -17,21 +17,17 @@ io.on('connection', socket => {
   console.log('client connected!');
 
   //server emitting a message to an specific client
-  io.emit('newMessage', {
+  io.emit('newUserMessage', {
     from: 'Admin',
-    text: 'Welcome to the chat app',
+    text: 'Welcome to the chat app!',
     createdAt: new Date(),
   });
 
   //server transmitting a message to all clients except the one who caused this action
-  socket.broadcast.emit('newMessage', {
+  socket.broadcast.emit('newEmailToEveryoneBut', {
     from: 'Admin',
     text: 'New user has signed in',
     createdAt: new Date(),
-  });
-
-  socket.on('createEmail', newMessage => {
-    console.log(newMessage);
   });
 
   //server losing connection of the client
