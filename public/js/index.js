@@ -14,7 +14,7 @@ socket.on('newUserMessage', function(message) {
   console.log(message);
 });
 
-socket.on('connection', function(message) {
+socket.on('newEmailToEveryoneBut', function(message) {
   const headerAlert = document.querySelector('.app-text');
   const welcomeText = message.text;
   console.log(message);
