@@ -1,3 +1,5 @@
+const path = require('path');
+const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -5,5 +7,8 @@ const app = express();
 
 // Setup middleware
 app.use(bodyParser.json());
+const publicPath = path.join(__dirname, '../public');
+app.use(express.static(publicPath));
+console.log(publicPath);
 
-module.exports = app;
+module.exports = http.createServer(app);
