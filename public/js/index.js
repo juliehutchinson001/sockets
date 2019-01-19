@@ -1,7 +1,4 @@
-
 const socket = io();
-let newMessage = document.querySelector('h1');
-let count = 0;
 
 socket.on('connect', function() {
   console.log('connected to server');
@@ -21,6 +18,19 @@ socket.on('newEmailToEveryoneBut', function(message) {
   setTimeout(() => { headerAlert.innerText = welcomeText }, 1000);
   setTimeout(() => { headerAlert.innerText = 'Chat Room' }, 3500);
 });
+
+const sendToServer = () => {
+  socket.on('createMessageTo', () => {
+    const newMessage = event.target.value;
+    socket.broadcast.emit('newMessage', {
+      from: 'User',
+      text: newMessage,
+      createdAt: new Date(),
+    });
+
+    console.log(newMessage);
+  });
+};
 
 socket.on('disconnect', function() {
   console.log('disconnected from the server');
