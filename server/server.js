@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 io.on('connection', socket => {
   console.log('client connected!');
 
-  // server emitting a message to an specific client
+  // server emitting a message to a specific client
   io.emit('newUserMessage', generateMessage('Admin', 'Welcome to the chat app!'));
 
   // server transmitting a message to all clients except the one who caused this action
@@ -17,6 +17,14 @@ io.on('connection', socket => {
     'newEmailToEveryoneBut',
     generateMessage('Admin', 'New user has signed in')
   );
+
+  socket.on('createMessage', (message, callback) => {
+    console.log('createMessage ', message);
+    io.emit('newMessage', generateMessage(message.sender, message.text));
+
+    // this is the cb that assures the client that the server got the message
+    callback(message.sender, 'Server got the message sent');
+  });
 
   // server losing connection of the client
   socket.on('disconnect', () => console.log('client disconnected'));
