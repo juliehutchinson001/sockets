@@ -10,7 +10,13 @@
   <body class="app">
     <h1 class="app-alert"></h1>
     <p class="app-text">Chat Room</p>
-    <input type="text" />
+    <input
+      type="text"
+      name="input"
+      required
+      pattern=".*\S.*"
+      placeholder="Type in a non-white space message"
+    />
     <p class="app-response"></p>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/index.js"></script>
