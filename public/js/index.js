@@ -1,4 +1,3 @@
-const request = require('request');
 const socket = io(); // eslint-disable-line no-undef
 const input = document.querySelector('input');
 
