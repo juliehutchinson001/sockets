@@ -1,4 +1,5 @@
 const socket = io(); // eslint-disable-line no-undef
+const messageForm = document.getElementById('message-form');
 const input = document.querySelector('input');
 
 socket.on('connect', () => {
@@ -46,6 +47,10 @@ const sendToServer = newMessage => {
 input.addEventListener('input', event => {
   const inputValue = event.target.value;
   sendToServer(inputValue);
+});
+
+messageForm.addEventListener('submit', event => {
+  event.preventDefault();
 });
 
 socket.on('newMessage', message => {
