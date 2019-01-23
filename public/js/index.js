@@ -7,23 +7,26 @@ socket.on('connect', () => {
 });
 
 socket.on('newUserMessage', message => {
-  const headerWelcome = document.querySelector('.app-alert');
+  const headerWelcome = document.querySelector('.app-text');
   const welcomeText = message.text;
   setTimeout(() => {
     headerWelcome.innerText = welcomeText;
   }, 1500);
+  setTimeout(() => {
+    headerWelcome.innerText = 'Chat-Room';
+  }, 4000);
   console.log(message);
 });
 
 socket.on('newEmailToEveryoneBut', message => {
-  const headerAlert = document.querySelector('.app-text');
+  const headerAlert = document.querySelector('.app-alert');
   const welcomeText = message.text;
   console.log(message);
   setTimeout(() => {
     headerAlert.innerText = welcomeText;
   }, 1000);
   setTimeout(() => {
-    headerAlert.innerText = 'Chat Room';
+    headerAlert.innerText = '';
   }, 3500);
 });
 
@@ -33,28 +36,25 @@ socket.emit('createMessage', { sender: 'Julie', text: 'Hello from Julie' }, (sen
 });
 
 const sendToServer = newMessage => {
-  socket.emit(
-    'newMessage',
-    { sender: 'User', text: newMessage, createdAt: new Date() },
-    (sender, data) => {
-      console.log(`${data} by ${sender}`);
-    }
-  );
+  socket.emit('createMessage', { sender: 'User', text: newMessage }, (sender, data) => {
+    console.log(`${data} by ${sender}`);
+  });
 
   console.log(newMessage);
 };
 
-input.addEventListener('input', event => {
-  const inputValue = event.target.value;
-  sendToServer(inputValue);
-});
-
 messageForm.addEventListener('submit', event => {
   event.preventDefault();
+  const inputValue = input.value;
+  sendToServer(inputValue);
 });
 
 socket.on('newMessage', message => {
   console.log('new Message: ', message);
+  const li = document.createElement('li');
+  const ul = document.getElementById('messages');
+  li.innerHTML = `${message.sender}: ${message.text}`;
+  ul.appendChild(li);
 });
 
 socket.on('disconnect', () => {
