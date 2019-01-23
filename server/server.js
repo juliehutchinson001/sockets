@@ -1,7 +1,6 @@
 const socketIO = require('socket.io');
 const server = require('./app');
 const { generateMessage } = require('./utils/generate_message');
-const { getGeolocation } = require('./utils/request-geolocation');
 
 const io = socketIO(server);
 const port = process.env.PORT || 3000;
