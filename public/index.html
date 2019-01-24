@@ -15,12 +15,14 @@
       <input
         type="text"
         name="message"
+        id="input-message"
         required
         pattern=".*\S.*"
         placeholder="Type in a non-white space message"
       />
       <input type="submit" value="Send" />
     </form>
+    <button type="button" id="send-location" >Send Location</button>
     <p class="app-response"></p>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/index.js"></script>
