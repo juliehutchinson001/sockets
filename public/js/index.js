@@ -1,6 +1,7 @@
 const socket = io(); // eslint-disable-line no-undef
 const messageForm = document.getElementById('message-form');
 const inputVal = document.getElementById('input-message');
+const locationButton = document.getElementById('send-location');
 
 socket.on('connect', () => {
   console.log('connected to server');
@@ -42,6 +43,24 @@ const sendToServer = newMessage => {
 
   console.log(newMessage);
 };
+
+locationButton.addEventListener('click', event => {
+  if (!navigator.geolocation) {
+    return alert('Geolocation not supported in this browser!');
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      console.log(position);
+      socket.emit(
+        'createLocationMessage',
+        { longitud: position.coords.longitude, latitude: position.coords.latitude },
+        (sender, data) => console.log(`${data} by ${sender}`)
+      );
+    },
+    () => alert('Unable to get your location')
+  );
+});
 
 messageForm.addEventListener('submit', event => {
   event.preventDefault();
