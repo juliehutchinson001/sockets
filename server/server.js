@@ -26,6 +26,11 @@ io.on('connection', socket => {
     callback(message.sender, 'Server got the message sent');
   });
 
+  socket.on('createLocationMessage', (message, callback) => {
+    console.log('createLocationMessage: ', message);
+    callback(message.sender, 'Server got the location request sent');
+  });
+
   // server losing connection of the client
   socket.on('disconnect', () => console.log('client disconnected'));
 });
