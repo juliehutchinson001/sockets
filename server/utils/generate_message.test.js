@@ -1,5 +1,6 @@
 // const request = require('supertest');
 // const app = require('../app');
+const matchingCharacters = /.*\S.*/;
 const { generateMessage } = require('./generate_message');
 const { generateLocationMessage } = require('./generate_location_message');
 
@@ -8,7 +9,6 @@ describe('generate message test', () => {
     expect.assertions(3);
     const sender = 'Julie';
     const text = 'This is a test message';
-    const matchingCharacters = /.*\S.*/;
     const message = generateMessage(sender, text);
 
     expect(message).toMatchObject({
@@ -23,7 +23,7 @@ describe('generate message test', () => {
 
 describe('generate correct location message test', () => {
   it('send the correct location message object', () => {
-    expect.assertions(3);
+    expect.assertions(5);
     const sender = 'Julie';
     const latitude = 25.47352;
     const longitude = -80.47417;
@@ -38,5 +38,7 @@ describe('generate correct location message test', () => {
     });
     expect(message.url).toContain(message.latitude);
     expect(message.url).toContain(message.longitude);
+    expect(matchingCharacters.test(sender)).toBe(true);
+    expect(matchingCharacters.test(message.url)).toBe(true);
   });
 });
