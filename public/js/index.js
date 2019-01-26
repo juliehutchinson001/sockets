@@ -2,9 +2,20 @@ const socket = io(); // eslint-disable-line no-undef
 const messageForm = document.getElementById('message-form');
 const inputVal = document.getElementById('input-message');
 const locationButton = document.getElementById('send-location');
+const ul = document.getElementById('messages');
 
 socket.on('connect', () => {
   console.log('connected to server');
+});
+
+socket.on('newLocationMessage', message => {
+  const li = document.createElement('li');
+  const a = document.createElement('a');
+  a.setAttribute('target', '_blank');
+  a.setAttribute('href', message.url);
+  a.innerHTML = 'My current location';
+  li.appendChild(a);
+  ul.appendChild(li);
 });
 
 socket.on('newUserMessage', message => {
@@ -51,10 +62,10 @@ locationButton.addEventListener('click', event => {
 
   navigator.geolocation.getCurrentPosition(
     position => {
-      console.log(position);
+      console.log(JSON.stringify(position, null, 3));
       socket.emit(
         'createLocationMessage',
-        { longitud: position.coords.longitude, latitude: position.coords.latitude },
+        { longitude: position.coords.longitude, latitude: position.coords.latitude },
         (sender, data) => console.log(`${data} by ${sender}`)
       );
     },
@@ -71,7 +82,6 @@ messageForm.addEventListener('submit', event => {
 socket.on('newMessage', message => {
   console.log('new Message: ', message);
   const li = document.createElement('li');
-  const ul = document.getElementById('messages');
   li.innerHTML = `${message.sender}: ${message.text}`;
   ul.appendChild(li);
 });
