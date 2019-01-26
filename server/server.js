@@ -1,6 +1,7 @@
 const socketIO = require('socket.io');
 const server = require('./app');
 const { generateMessage } = require('./utils/generate_message');
+const { generateLocationMessage } = require('./utils/generate_location_message');
 
 const io = socketIO(server);
 const port = process.env.PORT || 3000;
@@ -26,9 +27,12 @@ io.on('connection', socket => {
     callback(message.sender, 'Server got the message sent');
   });
 
-  socket.on('createLocationMessage', (message, callback) => {
-    console.log('createLocationMessage: ', message);
-    callback(message.sender, 'Server got the location request sent');
+  socket.on('createLocationMessage', (coords, callback) => {
+    socket.emit(
+      'newLocationMessage',
+      generateLocationMessage('Admin', `${coords.longitude}, ${coords.latitude}`)
+    );
+    callback('Server got the location request sent');
   });
 
   // server losing connection of the client
