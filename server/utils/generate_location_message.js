@@ -1,9 +1,11 @@
+const moment = require('moment');
+
 const generateLocationMessage = (sender, latitude, longitude) => ({
   sender,
-  url: `www.google.com/maps?q=${latitude},${longitude}`,
+  url: `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`,
   latitude,
   longitude,
-  createdAt: new Date().getTime(),
+  createdAt: moment().valueOf(),
 });
 
 module.exports = { generateLocationMessage };
