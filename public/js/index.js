@@ -5,21 +5,22 @@ const locationButton = document.getElementById('send-location');
 const ul = document.getElementById('messages');
 
 socket.on('connect', () => {
-  console.log('connected to server');
+  console.log(`connected to server`);
 });
-
 socket.on('newLocationMessage', message => {
+  const formattedTime = moment(message.createdAt).format('h:mm a'); // eslint-disable-line no-undef
   const li = document.createElement('li');
+  li.classList.add('message');
   const a = document.createElement('a');
   a.setAttribute('target', '_blank');
   a.setAttribute('href', message.url);
-  a.innerHTML = 'My current location';
+  a.innerText = `My current location (${formattedTime})`;
   li.appendChild(a);
   ul.appendChild(li);
 });
 
 socket.on('newUserMessage', message => {
-  const headerWelcome = document.querySelector('.app-text');
+  const headerWelcome = document.querySelector('.chat__text');
   const welcomeText = message.text;
   setTimeout(() => {
     headerWelcome.innerText = welcomeText;
@@ -31,7 +32,7 @@ socket.on('newUserMessage', message => {
 });
 
 socket.on('newEmailToEveryoneBut', message => {
-  const headerAlert = document.querySelector('.app-alert');
+  const headerAlert = document.querySelector('.chat__alert');
   const welcomeText = message.text;
   console.log(message);
   setTimeout(() => {
@@ -55,7 +56,7 @@ const sendToServer = newMessage => {
   console.log(newMessage);
 };
 
-locationButton.addEventListener('click', event => {
+locationButton.addEventListener('click', () => {
   if (!navigator.geolocation) {
     return alert('Geolocation not supported in this browser!');
   }
@@ -66,7 +67,7 @@ locationButton.addEventListener('click', event => {
       socket.emit(
         'createLocationMessage',
         { longitude: position.coords.longitude, latitude: position.coords.latitude },
-        (sender, data) => console.log(`${data} by ${sender}`)
+        confirmation => console.log(`${confirmation}`)
       );
     },
     () => alert('Unable to get your location')
@@ -81,8 +82,9 @@ messageForm.addEventListener('submit', event => {
 
 socket.on('newMessage', message => {
   console.log('new Message: ', message);
+  const formattedTime = moment(message.createdAt).format('h:mm a'); // eslint-disable-line no-undef
   const li = document.createElement('li');
-  li.innerHTML = `${message.sender}: ${message.text}`;
+  li.innerHTML = `${message.sender}: ${message.text} (${formattedTime})`;
   ul.appendChild(li);
 });
 
