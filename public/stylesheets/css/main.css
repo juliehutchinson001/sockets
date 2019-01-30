@@ -134,13 +134,9 @@ ul, li {
 }
 
 .map--container {
-  width: 22.5rem;
-}
-
-iframe {
   /* Dimensions */
-  height: 21.9rem;
-  width: 21.9rem;
+  height: 13rem;
+  width: 13rem;
 }
 
 input {
@@ -219,6 +215,7 @@ button:disabled {
 }
 
 .chat__credits--owner-information {
+  /* Dimensions */
   height: 10%;
   width: 100%;
 }
