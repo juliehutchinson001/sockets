@@ -11,6 +11,44 @@
 }
 
 
+.chat__messages {
+  /* Dimensions */
+  flex-grow: 1;
+  padding: 0.625rem;
+
+  /* Position */
+  /* overflow-y: auto; */
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  /* Style */
+  list-style-type: none;
+}
+
+.message {
+  padding: 0.625rem;
+}
+
+.message__title {
+  /* Dimensions */
+  margin-bottom: 0.31rem;
+
+  /* Position */
+  display: flex;
+}
+
+.message__title h1 {
+  /* Dimensions */
+  margin-right: 0.625rem;
+
+  /* Typography */
+  font-weight: 600;
+}
+
+.message__title span {
+  color: #999;
+}
+
 .map--container {
   width: 22.5rem;
 }
