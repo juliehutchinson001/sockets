@@ -11,6 +11,49 @@
 }
 
 
+.chat__footer {
+  /* Color */
+  background: #e6eaee;
+
+  /* Dimensions */
+  padding: 0.625rem;
+  /*height: 60px;*/
+  flex-shrink: 0;
+
+  /* Position */
+  display: flex;
+}
+
+.chat__footer form {
+  display: flex;
+  flex-grow: 1;
+}
+
+.chat__footer form * {
+  margin-right: 0.625rem;
+}
+
+.chat__footer .footer__button--submit {
+  /* Dimensions */
+  padding: 0 0.3rem;
+  flex-grow: 1;
+}
+
+.footer__button--submit,
+.footer__button--send-location {
+  /* Dimensions */
+  border-radius: 0.6rem;
+
+  /* Outline */
+  border: none;
+
+  /* Style */
+  cursor: pointer;
+
+  /* Typography */
+  font-size: 1rem;
+}
+
 button {
   /* border: none; */
   background: #265f82;
