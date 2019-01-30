@@ -11,6 +11,16 @@
 }
 
 
+.map--container {
+  width: 22.5rem;
+}
+
+iframe {
+  /* Dimensions */
+  height: 21.9rem;
+  width: 21.9rem;
+}
+
 .chat__footer {
   /* Color */
   background: #e6eaee;
