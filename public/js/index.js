@@ -1,4 +1,4 @@
-const socket = io(); // eslint-disable-line no-undef
+const socket = io();
 const messageForm = document.getElementById('message-form');
 const inputVal = document.getElementById('input-message');
 const locationButton = document.getElementById('send-location');
@@ -14,7 +14,7 @@ socket.on('connect', () => {
   console.log(`connected to server`);
 });
 socket.on('newLocationMessage', message => {
-  const formattedTime = moment(message.createdAt).format('h:mm a'); // eslint-disable-line no-undef
+  const formattedTime = moment(message.createdAt).format('h:mm a');
   const a = document.createElement('a');
   a.setAttribute('target', '_blank');
   a.setAttribute('href', message.url);
