@@ -11,6 +11,10 @@
 }
 
 
+.chat__credits--owner-information {
+  height: 10%;
+  width: 100%;
+}
 
 @media Screen and (max-width: 600px) {
   * {
