@@ -143,6 +143,18 @@ iframe {
   width: 21.9rem;
 }
 
+input {
+  /* Dimensions */
+  border-radius: 0.6rem;
+
+  /* Outline */
+  border: 0.18rem solid #315481;
+  outline: none;
+
+  /* Typography */
+  font-size: 1.56rem;
+}
+
 .chat__footer {
   /* Color */
   background: #e6eaee;
