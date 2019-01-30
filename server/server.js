@@ -30,7 +30,7 @@ io.on('connection', socket => {
   socket.on('createLocationMessage', (coords, callback) => {
     socket.emit(
       'newLocationMessage',
-      generateLocationMessage('Admin', `${coords.longitude}, ${coords.latitude}`)
+      generateLocationMessage('Admin', coords.latitude, coords.longitude)
     );
     callback('Server got the location request sent');
   });
