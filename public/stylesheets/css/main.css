@@ -1,43 +1,11 @@
-.app {
-  background-color: #915353;
-  height: 100vh;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
+* {
+  /* Dimensions */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 
-.app-text {
-  font-size: 32px;
+  /* Typography */
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+  font-size: 0.95rem;
 }
-.app-response {
-  font-size: 20px;
-}
-
-.app-alert {
-  font-size: 32px;
-}
-
-/* Show red borders when filled, but invalid */
-input:not(:placeholder-shown) {
-  border-color: red;
-}
-
-/* Show blue borders when valid (non-white space message) */
-input:valid {
-  border-color: blue;
-}
-
-input {
-  font-size: 32px;
-  border-radius: 5px;
-  margin-bottom: 16px;
-  width: 600px;
-  border: 3px solid #895655;
-  outline: none;
-}
-
-button {
-  font-size: 16px;
-  border-radius: 5px; }
