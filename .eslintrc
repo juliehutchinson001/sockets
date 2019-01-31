@@ -32,7 +32,7 @@
     "no-alert": "off",
     "no-console": "off",
     "no-plusplus": [ "error", { "allowForLoopAfterthoughts": true }],
-    "no-undef": [ "error", { "allow": ["io", "moment"] }],
+    "no-undef": [ "error", { "allow": ["io", "moment", "Handlebars"] }],
     "no-underscore-dangle": [ "error", { "allow": ["_id"] }],
     "no-unused-vars": [ "error", { "vars": "local", "args": "none" }],
     "no-var": "error",
