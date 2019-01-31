@@ -78,16 +78,25 @@ locationButton.addEventListener('click', () => {
     return alert('Geolocation not supported in this browser!');
   }
 
+  locationButton.setAttribute('disabled', 'disabled');
+  locationButton.innerText = 'Sending Location...'
+
   navigator.geolocation.getCurrentPosition(
     position => {
-      console.log(JSON.stringify(position, null, 3));
+      locationButton.removeAttribute('disabled');
+      locationButton.innerText = 'Send Location';
+
       socket.emit(
         'createLocationMessage',
         { longitude: position.coords.longitude, latitude: position.coords.latitude },
         confirmation => console.log(`${confirmation}`)
-      );
-    },
-    () => alert('Unable to get your location')
+        );
+      },
+      () => {
+        locationButton.removeAttribute('disabled');
+        locationButton.innerText = 'Send Location';
+        alert('Unable to get your location')
+      }
   );
 });
 
