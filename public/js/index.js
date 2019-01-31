@@ -15,13 +15,31 @@ socket.on('connect', () => {
 });
 socket.on('newLocationMessage', message => {
   const formattedTime = moment(message.createdAt).format('h:mm a');
+
   const a = document.createElement('a');
   a.setAttribute('target', '_blank');
   a.setAttribute('href', message.url);
   a.innerText = `My current location (${formattedTime})`;
 
+  const mapDisplayWindow = document.createElement('iframe');
+  mapDisplayWindow.classList.add('map--display');
+  mapDisplayWindow.setAttribute('title', 'My Current Location');
+  mapDisplayWindow.setAttribute('width', 300);
+  mapDisplayWindow.setAttribute('height', 300);
+  mapDisplayWindow.setAttribute('src', message.embedMap);
+
   const li = createNewMessageElement();
+  li.classList.add('map--after-space');
   li.appendChild(a);
+
+  const liMap = createNewMessageElement();
+  const mapContainer = document.createElement('div');
+  const mapAfterSpace = document.createElement('br');
+  mapContainer.classList.add('map--container');
+  mapContainer.appendChild(mapDisplayWindow);
+  liMap.appendChild(mapContainer);
+  ul.appendChild(liMap);
+  ul.appendChild(mapAfterSpace);
   ul.appendChild(li);
 });
 
