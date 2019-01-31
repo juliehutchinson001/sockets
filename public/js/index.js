@@ -110,6 +110,7 @@ socket.on('newMessage', message => {
   console.log('new Message: ', message);
   const formattedTime = moment(message.createdAt).format('h:mm a'); // eslint-disable-line no-undef
   const li = document.createElement('li');
+  li.classList.add('message');
   li.innerHTML = `${message.sender}: ${message.text} (${formattedTime})`;
   ul.appendChild(li);
 });
