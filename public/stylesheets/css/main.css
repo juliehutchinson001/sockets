@@ -139,6 +139,10 @@ ul, li {
   width: 13rem;
 }
 
+.map--after-space {
+  margin-top: 1rem;
+}
+
 input {
   /* Dimensions */
   border-radius: 0.6rem;
