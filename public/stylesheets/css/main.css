@@ -7,7 +7,7 @@
   /* Typography */
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
-  font-size: 0.95rem;
+  font-size: 16px;
 }
 
 .chat {
@@ -40,7 +40,7 @@ ul, li {
 
 .chat__main--container {
   /* Dimensions */
-  height: 90%;
+  height: 100vh;
   /* width: 100%; */
   width: 80%;
 
@@ -60,9 +60,7 @@ ul, li {
   background: linear-gradient(325deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* w3c */
 
   /* Dimensions */
-  /* height: 100vh; */
-  /* width: 16.25rem; */
-  height: 90%;
+  height: 100vh;
   width: 20%;
 
   /* Position */
@@ -101,7 +99,6 @@ ul, li {
   padding: 0.625rem;
 
   /* Position */
-  /* overflow-y: auto; */
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 
@@ -137,34 +134,29 @@ ul, li {
   /* Dimensions */
   height: 13rem;
   width: 13rem;
+  margin-bottom: 3rem;
 }
 
 .map--after-space {
   margin-top: 1rem;
 }
 
-input {
+.footer__input {
   /* Dimensions */
   border-radius: 0.6rem;
 
   /* Outline */
-  border: 0.18rem solid #315481;
+  border: 0.5px solid #315481;
   outline: none;
 
   /* Typography */
-  font-size: 1.56rem;
+  font-size: 1.5rem;
+  padding: .625rem 0 .625rem .625rem;
+  flex: 1;
 }
 
 .chat__footer {
-  /* Color */
-  background: #e6eaee;
-
-  /* Dimensions */
-  padding: 0.625rem;
-  /*height: 60px;*/
-  flex-shrink: 0;
-
-  /* Position */
+  padding: 1rem;
   display: flex;
 }
 
@@ -178,9 +170,7 @@ input {
 }
 
 .chat__footer .footer__button--submit {
-  /* Dimensions */
   padding: 0 0.3rem;
-  flex-grow: 1;
 }
 
 .footer__button--submit,
@@ -199,7 +189,6 @@ input {
 }
 
 button {
-  /* border: none; */
   background: #265f82;
   color: white;
   padding: 0 0.625rem;
@@ -210,18 +199,11 @@ button:hover {
   border: none;
   background: #1F4C69;
   color: white;
-  padding: 0.625rem;
 }
 
 button:disabled {
   cursor: default;
   background: #698ea5;
-}
-
-.chat__credits--owner-information {
-  /* Dimensions */
-  height: 10%;
-  width: 100%;
 }
 
 @media Screen and (max-width: 600px) {
@@ -231,6 +213,11 @@ button:disabled {
 
   .chat--sidebar {
     display: none;
+  }
+
+  .map--container {
+    /* Dimensions */
+    margin-bottom: 0rem;
   }
 
   .chat__footer {
