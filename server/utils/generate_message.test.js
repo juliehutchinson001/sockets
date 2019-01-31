@@ -23,7 +23,7 @@ describe('generate message test', () => {
 
 describe('generate correct location message test', () => {
   it('send the correct location message object', () => {
-    expect.assertions(5);
+    expect.assertions(6);
     const sender = 'Julie';
     const latitude = 25.47352;
     const longitude = -80.47417;
@@ -32,6 +32,7 @@ describe('generate correct location message test', () => {
     expect(message).toMatchObject({
       sender: expect.any(String),
       url: expect.any(String),
+      embedMap: expect.any(String),
       latitude: expect.any(Number),
       longitude: expect.any(Number),
       createdAt: expect.any(Number),
@@ -40,5 +41,6 @@ describe('generate correct location message test', () => {
     expect(message.url).toContain(message.longitude);
     expect(matchingCharacters.test(sender)).toBe(true);
     expect(matchingCharacters.test(message.url)).toBe(true);
+    expect(matchingCharacters.test(message.embedMap)).toBe(true);
   });
 });
