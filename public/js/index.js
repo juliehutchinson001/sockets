@@ -1,64 +1,64 @@
 const socket = io();
+const ul = document.getElementById('messages');
 const messageForm = document.getElementById('message-form');
 const inputVal = document.getElementById('input-message');
 const locationButton = document.getElementById('send-location');
-const ul = document.getElementById('messages');
-
-const createNewMessageElement = () => {
-  const li = document.createElement('li');
-  li.classList.add('message');
-  return li;
-};
 
 socket.on('connect', () => {
   console.log(`connected to server`);
 });
-socket.on('newLocationMessage', message => {
-  const formattedTime = moment(message.createdAt).format('h:mm a');
 
+const getDate = () => {
+  const nowDate = new Date();
+  const formattedDate = nowDate.toString().slice(4, 10);
+  const formattedTime = nowDate.toLocaleTimeString();
+
+  const currentDateHtml = `<span>${formattedDate} ${formattedTime}</span>`;
+
+  return currentDateHtml;
+};
+
+const newMessageElement = (sender, text) => {
+  const dateAndTime = getDate();
+  const li = document.createElement('li');
+  const userAuthor = `<h1>${sender}</h1>`;
+  const body = text === undefined ? `User's Location` : text;
+  const messageHeader = `<div class="message__title">${userAuthor} ${dateAndTime}:</div>`;
+  li.innerHTML = `${messageHeader}<p>${body}</p></div>`;
+  return li;
+};
+
+const newLocationLinkElement = message => {
   const a = document.createElement('a');
   a.setAttribute('target', '_blank');
   a.setAttribute('href', message.url);
-  a.innerText = `My current location (${formattedTime})`;
+  a.innerText = `Current Location`;
 
-  const mapDisplayWindow = document.createElement('iframe');
-  mapDisplayWindow.classList.add('map--display');
-  mapDisplayWindow.setAttribute('title', 'My Current Location');
-  mapDisplayWindow.setAttribute('width', 300);
-  mapDisplayWindow.setAttribute('height', 300);
-  mapDisplayWindow.setAttribute('src', message.embedMap);
-
-  const li = createNewMessageElement();
-  li.classList.add('map--after-space');
+  const li = newMessageElement(message.sender, message.text);
+  li.classList.add('message');
   li.appendChild(a);
+  return li;
+};
 
-  const liMap = createNewMessageElement();
-  const mapContainer = document.createElement('div');
-  const mapAfterSpace = document.createElement('br');
-  mapContainer.classList.add('map--container');
-  mapContainer.appendChild(mapDisplayWindow);
-  liMap.appendChild(mapContainer);
-  ul.appendChild(liMap);
-  ul.appendChild(mapAfterSpace);
+socket.on('newLocationMessage', message => {
+  const li = newLocationLinkElement(message);
   ul.appendChild(li);
 });
 
 socket.on('newUserMessage', message => {
-  const headerWelcome = createNewMessageElement();
   const welcomeText = message.text;
+  const headerWelcome = newMessageElement('Admin', welcomeText);
   setTimeout(() => {
-    headerWelcome.innerText = `Admin: ${welcomeText}`;
     ul.appendChild(headerWelcome);
   }, 1000);
   console.log(message);
 });
 
 socket.on('newEmailToEveryoneBut', message => {
-  const headerAlert = createNewMessageElement();
   const welcomeText = message.text;
+  const headerAlert = newMessageElement('Admin', welcomeText);
   console.log(message);
   setTimeout(() => {
-    headerAlert.innerText = `Admin: ${welcomeText}`;
     ul.appendChild(headerAlert);
   }, 1000);
 });
@@ -69,7 +69,6 @@ const sendToServer = newMessage => {
     inputVal.value = '';
     console.log(`${data} by ${sender}`);
   });
-
   console.log(newMessage);
 };
 
@@ -79,7 +78,7 @@ locationButton.addEventListener('click', () => {
   }
 
   locationButton.setAttribute('disabled', 'disabled');
-  locationButton.innerText = 'Sending Location...'
+  locationButton.innerText = 'Sending Location...';
 
   navigator.geolocation.getCurrentPosition(
     position => {
@@ -90,13 +89,13 @@ locationButton.addEventListener('click', () => {
         'createLocationMessage',
         { longitude: position.coords.longitude, latitude: position.coords.latitude },
         confirmation => console.log(`${confirmation}`)
-        );
-      },
-      () => {
-        locationButton.removeAttribute('disabled');
-        locationButton.innerText = 'Send Location';
-        alert('Unable to get your location')
-      }
+      );
+    },
+    () => {
+      locationButton.removeAttribute('disabled');
+      locationButton.innerText = 'Send Location';
+      alert('Unable to get your location');
+    }
   );
 });
 
@@ -104,15 +103,15 @@ messageForm.addEventListener('submit', event => {
   event.preventDefault();
   const inputValue = inputVal.value;
   sendToServer(inputValue);
+  inputVal.focus();
 });
 
 socket.on('newMessage', message => {
-  console.log('new Message: ', message);
-  const formattedTime = moment(message.createdAt).format('h:mm a'); // eslint-disable-line no-undef
-  const li = document.createElement('li');
+  const li = newMessageElement('User', message.text);
   li.classList.add('message');
-  li.innerHTML = `${message.sender}: ${message.text} (${formattedTime})`;
   ul.appendChild(li);
+
+  console.log('new Message: ', message);
 });
 
 socket.on('disconnect', () => {
