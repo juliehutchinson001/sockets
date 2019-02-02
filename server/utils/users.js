@@ -28,6 +28,15 @@ class Users {
     return user;
   }
 
+  removeUser(id) {
+    const userToBeRemoved = this.getUser(id);
+
+    if (userToBeRemoved) {
+      this.users = this.users.filter(user => user.id !== id);
+    }
+    return userToBeRemoved;
+  }
+
 
 }
 
