@@ -1,52 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sockets Chat App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/stylesheets/css/main.css" media="screen" rel="stylesheet" type="text/css" />
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
 
-  <body class="chat">
-    <section class="chat--sidebar">
-      <h1 class="chat__header--room">People</h1>
-      <div id="users" class="chat__room--members"></div>
-    </section>
-
-    <main class="chat__main--container">
-      <ul id="messages" class="chat__messages"></ul>
-
-      <footer class="chat__footer">
-        <form class="footer__form" id="message-form">
-          <input
-            type="text"
-            name="message"
-            class="footer__input"
-            id="input-message"
-            required
-            autofocus
-            autocomplete="off"
-            placeholder="Type in a message"
-          />
-          <input
-            class="footer__button--submit"
-            type="submit"
-            value="Send"
-          />
-        </form>
-
-        <button
-          type="button"
-          class="footer__button--send-location"
-          id="send-location"
-        >
-          Send Location
-        </button>
-
-      </footer>
-    </main>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/index.js"></script>
-  </body>
+</body>
 </html>
