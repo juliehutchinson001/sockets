@@ -1,7 +1,6 @@
 {
   "globals": {
-    "io": false,
-    "Handlebars": false
+    "io": false
   },
   "extends": ["airbnb-base", "prettier", "prettier/react"],
   "parserOptions": {
