@@ -2,6 +2,10 @@ const socketIO = require('socket.io');
 const server = require('./app');
 const { generateMessage } = require('./utils/generate_message');
 const { generateLocationMessage } = require('./utils/generate_location_message');
+const { isRealString } = require('./utils/validation');
+const { users } = require('./utils/users');
+// const { person } = require('./utils/person');
+// const { message } = require('./utils/message');
 
 const io = socketIO(server);
 const port = process.env.PORT || 3000;
@@ -33,6 +37,23 @@ io.on('connection', socket => {
       generateLocationMessage('Admin', coords.latitude, coords.longitude)
     );
     callback('Server got the location request sent');
+  });
+
+  socket.on('join', (params, callback) => {
+    if (!isRealString(params.name) || !isRealString(params.room)) {
+      return callback('Name and room name are required.');
+    }
+
+    socket.join(params.room);
+    users.removeUser(socket.id);
+    users.addUser(socket.id, params.name, params.room);
+
+    io.to(params.room).emit('updateUserList', users.getUserList(params.room));
+    socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
+    socket.broadcast
+      .to(params.room)
+      .emit('newMessage', generateMessage('Admin', `${params.name} has joined.`));
+    callback();
   });
 
   // server losing connection of the client
