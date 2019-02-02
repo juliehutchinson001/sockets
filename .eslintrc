@@ -32,6 +32,7 @@
     "consistent-return": "off",
     "curly": "error",
     "global-require": "error",
+    "no-duplicate-imports": "off",
     "indent": ["error", 2],
     "no-alert": "off",
     "no-console": "off",
