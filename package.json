@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./server/server.js",
     "dev": "nodemon ./server/server.js",
+    "build": "parcel ./public/index.html",
     "test": "jest --watch --expand --verbose"
   },
   "engines": {
@@ -35,7 +36,6 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
-    "moment": "^2.24.0",
     "mongodb": "^3.1.10",
     "mongoose": "^5.4.3",
     "request": "^2.88.0",
@@ -51,6 +51,7 @@
     "eslint-plugin-react": "^7.12.3",
     "jest": "^23.6.0",
     "nodemon": "^1.18.9",
+    "parcel-bundler": "^1.11.0",
     "prettier": "1.15.3",
     "supertest": "^3.3.0"
   }
