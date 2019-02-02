@@ -37,7 +37,16 @@ class Users {
     return userToBeRemoved;
   }
 
+  getUser(id) {
+    return this.users.filter(user => user.id === id)[0]; // ?????
+  }
 
+  getUserList(room) {
+    const users = this.users.filter(user => user.room === room);
+    const namesArray = users.map(user => user.name);
+
+    return namesArray;
+  }
 }
 
 module.exports = { Users };
