@@ -1,4 +1,6 @@
-const moment = require('moment');
+const nowTime = new Date();
+const formattedDate = nowTime.toString().slice(4, 10);
+const formattedTime = nowTime.toLocaleTimeString();
 
 const generateLocationMessage = (sender, latitude, longitude) => ({
   sender,
@@ -6,7 +8,7 @@ const generateLocationMessage = (sender, latitude, longitude) => ({
   embedMap: `https://mapquest.com/embed/?center=${latitude},${longitude}2&zoom=14&maptype=map`,
   latitude,
   longitude,
-  createdAt: moment().valueOf(),
+  createdAt: `${formattedDate} ${formattedTime}`,
 });
 
 module.exports = { generateLocationMessage };

@@ -14,7 +14,7 @@ describe('generate message test', () => {
     expect(message).toMatchObject({
       sender: expect.any(String),
       text: expect.any(String),
-      createdAt: expect.any(Number),
+      createdAt: expect.any(String),
     });
     expect(matchingCharacters.test(sender)).toBe(true);
     expect(matchingCharacters.test(text)).toBe(true);
@@ -35,7 +35,7 @@ describe('generate correct location message test', () => {
       embedMap: expect.any(String),
       latitude: expect.any(Number),
       longitude: expect.any(Number),
-      createdAt: expect.any(Number),
+      createdAt: expect.any(String),
     });
     expect(message.url).toContain(message.latitude);
     expect(message.url).toContain(message.longitude);
