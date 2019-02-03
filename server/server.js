@@ -3,9 +3,8 @@ const server = require('./app');
 const { generateMessage } = require('./utils/generate_message');
 const { generateLocationMessage } = require('./utils/generate_location_message');
 const { isRealString } = require('./utils/validation');
-const { users } = require('./utils/users');
+const { Users } = require('./utils/users');
 // const { person } = require('./utils/person');
-// const { message } = require('./utils/message');
 
 const io = socketIO(server);
 const port = process.env.PORT || 3000;
@@ -20,12 +19,15 @@ io.on('connection', socket => {
     }
 
     socket.join(params.room);
-    users.removeUser(socket.id);
-    users.addUser(socket.id, params.name, params.room);
+    Users.removeUser(socket.id);
+    Users.addUser(socket.id, params.name, params.room);
 
-    io.to(params.room).emit('updateUserList', users.getUserList(params.room));
+    io.to(params.room).emit('updateUserList', Users.getUserList(params.room));
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
-    socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} has joined.`));
+    socket.broadcast
+      .to(params.room)
+      .emit('newMessage', generateMessage('Admin', `${params.name} has joined.`));
+
     callback();
   });
 
@@ -39,7 +41,7 @@ io.on('connection', socket => {
   );
 
   socket.on('createMessage', (message, callback) => {
-    const user = users.getUser(socket.id);
+    const user = Users.getUser(socket.id);
     console.log('createMessage ', message);
     // io.emit('newMessage', generateMessage(message.sender, message.text));
 
@@ -52,10 +54,13 @@ io.on('connection', socket => {
   });
 
   socket.on('createLocationMessage', (coords, callback) => {
-    const user = users.getUser(socket.id);
+    const user = Users.getUser(socket.id);
 
     if (user) {
-      io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude));
+      io.to(user.room).emit(
+        'newLocationMessage',
+        generateLocationMessage(user.name, coords.latitude, coords.longitude)
+      );
     }
     // socket.emit(
     //   'newLocationMessage',
@@ -70,10 +75,10 @@ io.on('connection', socket => {
     }
 
     socket.join(params.room);
-    users.removeUser(socket.id);
-    users.addUser(socket.id, params.name, params.room);
+    Users.removeUser(socket.id);
+    Users.addUser(socket.id, params.name, params.room);
 
-    io.to(params.room).emit('updateUserList', users.getUserList(params.room));
+    io.to(params.room).emit('updateUserList', Users.getUserList(params.room));
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
     socket.broadcast
       .to(params.room)
@@ -84,10 +89,10 @@ io.on('connection', socket => {
   // server losing connection of the client
   // socket.on('disconnect', () => console.log('client disconnected'));
   socket.on('disconnect', () => {
-    const user = users.removeUser(socket.id);
+    const user = Users.removeUser(socket.id);
 
     if (user) {
-      io.to(user.room).emit('updateUserList', users.getUserList(user.room));
+      io.to(user.room).emit('updateUserList', Users.getUserList(user.room));
       io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left.`));
     }
   });
