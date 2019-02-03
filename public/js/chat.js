@@ -7,7 +7,7 @@ const locationButton = document.getElementById('send-location');
 const scrollToBottom = () => {
   // Selectors
   const messages = document.getElementById('messages');
-  const newMessage = messages.lastChild();
+  const newMessage = messages.lastChild;
 
   // Heights
   const clientHeight = messages.clientHeight();
