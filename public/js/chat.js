@@ -7,11 +7,12 @@ const locationButton = document.getElementById('send-location');
 const scrollToBottom = () => {
   // Selectors
   const messages = document.getElementById('messages');
-  const newMessage = messages.children('li:last-child');
+  const newMessage = messages.lastChild();
+
   // Heights
-  const clientHeight = messages.prop('clientHeight');
-  const scrollTop = messages.prop('scrollTop');
-  const scrollHeight = messages.prop('scrollHeight');
+  const clientHeight = messages.clientHeight();
+  const scrollTop = messages.scrollTop();
+  const scrollHeight = messages.scrollHeight();
   const newMessageHeight = newMessage.innerHeight();
   const lastMessageHeight = newMessage.prev().innerHeight();
 
@@ -59,6 +60,7 @@ const newLocationLinkElement = message => {
 socket.on('newLocationMessage', message => {
   const li = newLocationLinkElement(message);
   ul.appendChild(li);
+  scrollToBottom();
 });
 
 socket.on('newUserMessage', message => {
@@ -76,6 +78,7 @@ socket.on('newEmailToEveryoneBut', message => {
   console.log(message);
   setTimeout(() => {
     ul.appendChild(headerAlert);
+    scrollToBottom();
   }, 1000);
 });
 
@@ -126,6 +129,7 @@ socket.on('newMessage', message => {
   const li = newMessageElement('User', message.text);
   li.classList.add('message');
   ul.appendChild(li);
+  scrollToBottom();
 
   console.log('new Message: ', message);
 });
