@@ -8,6 +8,7 @@ const { Users } = require('./utils/users');
 
 const io = socketIO(server);
 const port = process.env.PORT || 3000;
+const users = new Users();
 
 // server talking to client
 io.on('connection', socket => {
@@ -19,10 +20,10 @@ io.on('connection', socket => {
     }
 
     socket.join(params.room);
-    Users.removeUser(socket.id);
-    Users.addUser(socket.id, params.name, params.room);
+    users.removeUser(socket.id);
+    users.addUser(socket.id, params.name, params.room);
 
-    io.to(params.room).emit('updateUserList', Users.getUserList(params.room));
+    io.to(params.room).emit('updateUserList', users.getUserList(params.room));
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
     socket.broadcast
       .to(params.room)
@@ -41,7 +42,7 @@ io.on('connection', socket => {
   );
 
   socket.on('createMessage', (message, callback) => {
-    const user = Users.getUser(socket.id);
+    const user = users.getUser(socket.id);
     console.log('createMessage ', message);
     // io.emit('newMessage', generateMessage(message.sender, message.text));
 
@@ -54,7 +55,7 @@ io.on('connection', socket => {
   });
 
   socket.on('createLocationMessage', (coords, callback) => {
-    const user = Users.getUser(socket.id);
+    const user = users.getUser(socket.id);
 
     if (user) {
       io.to(user.room).emit(
@@ -75,10 +76,10 @@ io.on('connection', socket => {
     }
 
     socket.join(params.room);
-    Users.removeUser(socket.id);
-    Users.addUser(socket.id, params.name, params.room);
+    users.removeUser(socket.id);
+    users.addUser(socket.id, params.name, params.room);
 
-    io.to(params.room).emit('updateUserList', Users.getUserList(params.room));
+    io.to(params.room).emit('updateUserList', users.getUserList(params.room));
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
     socket.broadcast
       .to(params.room)
@@ -89,10 +90,10 @@ io.on('connection', socket => {
   // server losing connection of the client
   // socket.on('disconnect', () => console.log('client disconnected'));
   socket.on('disconnect', () => {
-    const user = Users.removeUser(socket.id);
+    const user = users.removeUser(socket.id);
 
     if (user) {
-      io.to(user.room).emit('updateUserList', Users.getUserList(user.room));
+      io.to(user.room).emit('updateUserList', users.getUserList(user.room));
       io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left.`));
     }
   });
