@@ -23,6 +23,19 @@ const scrollToBottom = () => {
 
 socket.on('connect', () => {
   console.log(`connected to server`);
+  const parameters = {};
+  window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, (m, key, value) => {
+    parameters[key] = value;
+  });
+
+  socket.emit('join', parameters, error => {
+    console.log('join');
+
+    if (error) {
+      // alert(error);
+      window.location.href = '/';
+    }
+  });
 });
 
 const getDate = () => {
@@ -134,6 +147,4 @@ socket.on('newMessage', message => {
   console.log('new Message: ', message);
 });
 
-socket.on('disconnect', () => {
-  console.log('disconnected from the server');
-});
+socket.on('disconnect', () => console.log('disconnected from the server'));
