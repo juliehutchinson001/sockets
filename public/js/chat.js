@@ -3,7 +3,7 @@ const ul = document.getElementById('messages');
 const messageForm = document.getElementById('message-form');
 const inputVal = document.getElementById('input-message');
 const locationButton = document.getElementById('send-location');
-
+/*
 const scrollToBottom = () => {
   // Selectors
   const messages = document.getElementById('messages');
@@ -20,24 +20,7 @@ const scrollToBottom = () => {
     messages.scrollTop(scrollHeight);
   }
 };
-
-socket.on('connect', () => {
-  console.log(`connected to server`);
-  const parameters = {};
-  window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, (m, key, value) => {
-    parameters[key] = value;
-  });
-
-  socket.emit('join', parameters, error => {
-    console.log('join');
-
-    if (error) {
-      // alert(error);
-      window.location.href = '/';
-    }
-  });
-});
-
+*/
 const getDate = () => {
   const nowDate = new Date();
   const formattedDate = nowDate.toString().slice(4, 10);
@@ -48,6 +31,11 @@ const getDate = () => {
   return currentDateHtml;
 };
 
+/**
+ *
+ * @param {*} sender
+ * @param {*} text
+ */
 const newMessageElement = (sender, text) => {
   const dateAndTime = getDate();
   const li = document.createElement('li');
@@ -70,10 +58,23 @@ const newLocationLinkElement = message => {
   return li;
 };
 
+const sendToServer = newMessage => {
+  // the client sends a callback to ask the server confirmation about receiving a new message
+  socket.emit('createMessage', { sender: 'User', text: newMessage }, (sender, data) => {
+    inputVal.value = '';
+    console.log(`${data} by ${sender}`);
+  });
+  console.log(newMessage);
+};
+
+socket.on('connect', () => {
+  console.log(`connected to server`);
+});
+
 socket.on('newLocationMessage', message => {
   const li = newLocationLinkElement(message);
   ul.appendChild(li);
-  scrollToBottom();
+  // scrollToBottom();
 });
 
 socket.on('newUserMessage', message => {
@@ -91,18 +92,20 @@ socket.on('newEmailToEveryoneBut', message => {
   console.log(message);
   setTimeout(() => {
     ul.appendChild(headerAlert);
-    scrollToBottom();
+    // scrollToBottom();
   }, 1000);
 });
 
-const sendToServer = newMessage => {
-  // the client sends a callback to ask the server confirmation about receiving a new message
-  socket.emit('createMessage', { sender: 'User', text: newMessage }, (sender, data) => {
-    inputVal.value = '';
-    console.log(`${data} by ${sender}`);
-  });
-  console.log(newMessage);
-};
+socket.on('newMessage', message => {
+  const li = newMessageElement('User', message.text);
+  li.classList.add('message');
+  ul.appendChild(li);
+  // scrollToBottom();
+
+  console.log('new Message: ', message);
+});
+
+socket.on('disconnect', () => console.log('disconnected from the server'));
 
 locationButton.addEventListener('click', () => {
   if (!navigator.geolocation) {
@@ -137,14 +140,3 @@ messageForm.addEventListener('submit', event => {
   sendToServer(inputValue);
   inputVal.focus();
 });
-
-socket.on('newMessage', message => {
-  const li = newMessageElement('User', message.text);
-  li.classList.add('message');
-  ul.appendChild(li);
-  scrollToBottom();
-
-  console.log('new Message: ', message);
-});
-
-socket.on('disconnect', () => console.log('disconnected from the server'));
