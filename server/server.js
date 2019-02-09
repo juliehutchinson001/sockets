@@ -24,7 +24,7 @@ io.on('connection', socket => {
     users.addUser(socket.id, params.name, params.room);
 
     io.to(params.room).emit('updateUserList', users.getUserList(params.room));
-    socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
+    // socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
     socket.broadcast
       .to(params.room)
       .emit('newMessage', generateMessage('Admin', `${params.name} has joined.`));
@@ -44,7 +44,7 @@ io.on('connection', socket => {
   socket.on('createMessage', (message, callback) => {
     const user = users.getUser(socket.id);
     console.log('createMessage ', message);
-    // io.emit('newMessage', generateMessage(message.sender, message.text));
+    io.emit('newMessage', generateMessage(message.sender, message.text));
 
     if (user && isRealString(message.text)) {
       io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
@@ -63,35 +63,18 @@ io.on('connection', socket => {
         generateLocationMessage(user.name, coords.latitude, coords.longitude)
       );
     }
-    // socket.emit(
-    //   'newLocationMessage',
-    //   generateLocationMessage('Admin', coords.latitude, coords.longitude)
-    // );
+    socket.emit(
+      'newLocationMessage',
+      generateLocationMessage('Admin', coords.latitude, coords.longitude)
+    );
     callback('Server got the location request sent');
   });
 
-  socket.on('join', (params, callback) => {
-    if (!isRealString(params.name) || !isRealString(params.room)) {
-      return callback('Name and room name are required.');
-    }
-
-    socket.join(params.room);
-    users.removeUser(socket.id);
-    users.addUser(socket.id, params.name, params.room);
-
-    io.to(params.room).emit('updateUserList', users.getUserList(params.room));
-    socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
-    socket.broadcast
-      .to(params.room)
-      .emit('newMessage', generateMessage('Admin', `${params.name} has joined.`));
-    callback();
-  });
-
   // server losing connection of the client
-  // socket.on('disconnect', () => console.log('client disconnected'));
+  // socket.on('disconnect', () => );
   socket.on('disconnect', () => {
     const user = users.removeUser(socket.id);
-
+    console.log('client disconnected');
     if (user) {
       io.to(user.room).emit('updateUserList', users.getUserList(user.room));
       io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left.`));
