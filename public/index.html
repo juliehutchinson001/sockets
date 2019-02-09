@@ -10,25 +10,26 @@
 
 <body class="centered-form">
   <div class="centered-form__form">
-    <form action="/chat.html">
+    <form id="signin-form">
       <div class="form-field">
         <h1>Join a Chat</h1>
       </div>
       <div class="form-field">
         <label>Display name</label>
-        <input type="text" name="name" autofocus />
+        <input type="text" name="name" />
       </div>
       <div class="form-field">
         <label>Room name</label>
         <input type="text" name="room" />
       </div>
       <div class="form-field">
-        <button>Join</button>
+        <input type="submit" value="Join">
       </div>
     </form>
   </div>
+
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/js/chat.js"></script>
+  <script src="/js/validation.js"></script>
 </body>
 
 </html>
