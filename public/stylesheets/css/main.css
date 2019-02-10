@@ -1,5 +1,4 @@
 * {
-  /* Dimensions */
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -92,7 +91,6 @@
 }
 
 .chat {
-  /* Dimensions */
   height: 100vh;
 
   /* Color */
@@ -120,7 +118,6 @@ ul, li {
 }
 
 .chat__main--container {
-  /* Dimensions */
   height: 100vh;
   /* width: 100%; */
   width: 80%;
@@ -140,7 +137,6 @@ ul, li {
   background: -ms-linear-gradient(125deg, #213239 0%, #42647D 100%); /* ie10+ */
   background: linear-gradient(325deg, #213239 0%, #42647D 100%); /* w3c */
 
-  /* Dimensions */
   height: 100vh;
   width: 20%;
 
@@ -165,7 +161,6 @@ ul, li {
   /* Color */
   background: #e6eaee;
 
-  /* Dimensions */
   border-radius: 0.31rem;
   padding: 0.625rem;
   margin: 0.625rem;
@@ -175,7 +170,6 @@ ul, li {
 }
 
 .chat__messages {
-  /* Dimensions */
   flex-grow: 1;
   padding: 0.625rem;
 
@@ -192,7 +186,6 @@ ul, li {
 }
 
 .message__title {
-  /* Dimensions */
   margin-bottom: 0.31rem;
 
   /* Position */
@@ -200,7 +193,6 @@ ul, li {
 }
 
 .message__title h1 {
-  /* Dimensions */
   margin-right: 0.625rem;
 
   /* Typography */
@@ -212,7 +204,6 @@ ul, li {
 }
 
 .map--container {
-  /* Dimensions */
   height: 13rem;
   width: 13rem;
   margin-bottom: 3rem;
@@ -223,7 +214,6 @@ ul, li {
 }
 
 .footer__input {
-  /* Dimensions */
   border-radius: 0.6rem;
 
   /* Outline */
@@ -256,7 +246,6 @@ ul, li {
 
 .footer__button--submit,
 .footer__button--send-location {
-  /* Dimensions */
   border-radius: 0.6rem;
 
   /* Outline */
@@ -297,7 +286,6 @@ button:disabled {
   }
 
   .map--container {
-    /* Dimensions */
     margin-bottom: 0rem;
   }
 
