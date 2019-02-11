@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
 
-  /* Typography */
   font-family: "Helvetica Neue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
   font-size: 16px;
@@ -108,7 +107,6 @@
   /* Position */
   text-align: center;
 
-  /* Typography */
   font-weight: 600;
   font-size: 1.5rem;
 }
@@ -195,7 +193,6 @@ ul, li {
 .message__title h1 {
   margin-right: 0.625rem;
 
-  /* Typography */
   font-weight: 600;
 }
 
@@ -220,7 +217,6 @@ ul, li {
   border: 0.5px solid #315481;
   outline: none;
 
-  /* Typography */
   font-size: 1.5rem;
   padding: .625rem 0 .625rem .625rem;
   flex: 1;
@@ -254,7 +250,6 @@ ul, li {
   /* Style */
   cursor: pointer;
 
-  /* Typography */
   font-size: 1rem;
 }
 
