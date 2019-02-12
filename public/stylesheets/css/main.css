@@ -92,7 +92,6 @@
 .chat {
   height: 100vh;
 
-  /* Color */
   background-color: #E1E1E1;
   color: #0A151F;
 
@@ -127,7 +126,6 @@ ul, li {
 }
 
 .chat--sidebar {
-  /* Color */
   background: -moz-linear-gradient(125deg, #213239 0%, #42647D 100%); /* ff3.6+ */
   background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #42647D), color-stop(100%, #213239)); /* safari4+,chrome */
   background: -webkit-linear-gradient(125deg, #213239 0%, #42647D 100%); /* safari5.1+,chrome10+ */
@@ -143,7 +141,6 @@ ul, li {
 }
 
 .chat--sidebar h1 {
-  /* Color */
   color: #e6eaee;
 
   /* Position */
@@ -156,7 +153,6 @@ ul, li {
 }
 
 .chat--sidebar li {
-  /* Color */
   background: #e6eaee;
 
   border-radius: 0.31rem;
