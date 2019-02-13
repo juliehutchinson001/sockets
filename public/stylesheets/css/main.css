@@ -95,7 +95,6 @@
   background-color: #E1E1E1;
   color: #0A151F;
 
-  /* Position */
   align-items: center;
   display: flex;
   flex-wrap: wrap;
@@ -103,7 +102,6 @@
 }
 
 .chat__header--room {
-  /* Position */
   text-align: center;
 
   font-weight: 600;
@@ -119,7 +117,6 @@ ul, li {
   /* width: 100%; */
   width: 80%;
 
-  /* Position */
   display: flex;
   /* flex-direction: row; */
   flex-direction: column;
@@ -136,14 +133,12 @@ ul, li {
   height: 100vh;
   width: 20%;
 
-  /* Position */
   overflow-y: scroll;
 }
 
 .chat--sidebar h1 {
   color: #e6eaee;
 
-  /* Position */
   margin: 0.625rem 1.25rem;
   text-align: left;
 }
@@ -167,7 +162,6 @@ ul, li {
   flex-grow: 1;
   padding: 0.625rem;
 
-  /* Position */
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 
@@ -182,7 +176,6 @@ ul, li {
 .message__title {
   margin-bottom: 0.31rem;
 
-  /* Position */
   display: flex;
 }
 
