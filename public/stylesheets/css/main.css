@@ -120,6 +120,13 @@ ul, li {
   flex-direction: column;
 }
 
+.chat__room-members {
+  padding: 20px;
+  padding-top: 0;
+  text-transform: capitalize;
+}
+
+
 .chat--sidebar {
   background: -moz-linear-gradient(125deg, #213239 0%, #42647D 100%);
   background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #42647D), color-stop(100%, #213239));
