@@ -126,6 +126,10 @@ ul, li {
   text-transform: capitalize;
 }
 
+.chat__room-member {
+  padding-bottom: 20px;
+  color: #BCBFC2;
+}
 
 .chat--sidebar {
   background: -moz-linear-gradient(125deg, #213239 0%, #42647D 100%);
