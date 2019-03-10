@@ -238,7 +238,6 @@ ul, li {
 .footer__button--submit,
 .footer__button--send-location {
   border-radius: 0.6rem;
-
   border: none;
 
   cursor: pointer;
@@ -274,7 +273,7 @@ button:disabled {
   }
 
   .map--container {
-    margin-bottom: 0rem;
+    margin-bottom: 0;
   }
 
   .chat__footer {
