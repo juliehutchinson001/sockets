@@ -1,5 +1,3 @@
-// const request = require('supertest');
-// const app = require('../app');
 const matchingCharacters = /.*\S.*/;
 const { generateMessage } = require('./generate_message');
 const { generateLocationMessage } = require('./generate_location_message');
