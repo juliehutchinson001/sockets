@@ -1,5 +1,3 @@
-// import { Users } from './users';
-
 class Person {
   constructor(name, age) {
     this.name = name;
