@@ -1,4 +1,6 @@
-/*
+/**
+ * @description class to create template of each user
+ * @example
 [
   {
     id: '/#12poiajdspfoif',
@@ -12,10 +14,6 @@
   }
 ]
 */
-// addUser(id, name, room)
-// removeUser(id)
-// getUser(id)
-// getUserList(room)
 
 class Users {
   constructor() {
