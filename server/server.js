@@ -6,7 +6,6 @@ const {
 } = require('./utils/generate_location_message');
 const { isRealString } = require('./utils/validation');
 const { Users } = require('./utils/users');
-// const { person } = require('./utils/person');
 
 const io = socketIO(server);
 const port = process.env.PORT || 3000;
@@ -22,11 +21,14 @@ io.on('connection', socket => {
     }
 
     socket.join(params.room);
-    users.removeUser(socket.id);
     users.addUser(socket.id, params.name, params.room);
 
-    io.to(params.room).emit('updateUserList', users.getUserList(params.room));
-    // socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
+    setTimeout(
+      () => io.emit('updateUserList', users.getUserList(params.room)),
+
+      1000
+    );
+
     socket.broadcast
       .to(params.room)
       .emit(
@@ -34,7 +36,7 @@ io.on('connection', socket => {
         generateMessage('Admin', `${params.name} has joined.`)
       );
 
-    callback();
+    callback(users.getUser(socket.id));
   });
 
   // server emitting a message to a specific client
