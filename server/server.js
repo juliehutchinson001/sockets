@@ -84,7 +84,6 @@ io.on('connection', socket => {
   });
 
   // server losing connection of the client
-  // socket.on('disconnect', () => );
   socket.on('disconnect', () => {
     const user = users.removeUser(socket.id);
     console.log('client disconnected');
