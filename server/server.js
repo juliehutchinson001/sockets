@@ -64,7 +64,7 @@ io.on('connection', socket => {
     }
 
     // this is the cb that assures the client that the server got the message
-    callback(message.sender, 'Server got the message sent');
+    callback(message.name, 'Server got the message sent');
   });
 
   socket.on('createLocationMessage', (coords, callback) => {
