@@ -3,24 +3,7 @@ const ul = document.getElementById('messages');
 const messageForm = document.getElementById('message-form');
 const inputVal = document.getElementById('input-message');
 const locationButton = document.getElementById('send-location');
-/*
-const scrollToBottom = () => {
-  // Selectors
-  const messages = document.getElementById('messages');
-  const newMessage = messages.lastChild;
 
-  // Heights
-  const { clientHeight } = messages.clientHeight;
-  const { scrollTop } = messages.scrollTop;
-  const { scrollHeight } = messages.scrollHeight;
-  const newMessageHeight = newMessage.innerHeight;
-  const lastMessageHeight = newMessage.previousSibling.innerHTML.innerHeight;
-
-  if (clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight) {
-    messages.scrollTop(scrollHeight);
-  }
-};
-*/
 const getDate = () => {
   const nowDate = new Date();
   const formattedDate = nowDate.toString().slice(4, 10);
@@ -60,10 +43,14 @@ const newLocationLinkElement = message => {
 
 const sendToServer = newMessage => {
   // the client sends a callback to ask the server confirmation about receiving a new message
-  socket.emit('createMessage', { sender: 'User', text: newMessage }, (sender, data) => {
-    inputVal.value = '';
-    console.log(`${data} by ${sender}`);
-  });
+  socket.emit(
+    'createMessage',
+    { sender: 'User', text: newMessage },
+    (sender, data) => {
+      inputVal.value = '';
+      console.log(`${data} by ${sender}`);
+    }
+  );
   console.log(newMessage);
 };
 
@@ -122,7 +109,10 @@ locationButton.addEventListener('click', () => {
 
       socket.emit(
         'createLocationMessage',
-        { longitude: position.coords.longitude, latitude: position.coords.latitude },
+        {
+          longitude: position.coords.longitude,
+          latitude: position.coords.latitude,
+        },
         confirmation => console.log(`${confirmation}`)
       );
     },
