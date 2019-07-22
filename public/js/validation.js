@@ -11,10 +11,10 @@ signinForm.addEventListener('submit', event => {
   }
 
   socket.emit('join', signinValues, error => {
-    console.log('join');
     if (error) {
       alert(error);
     } else {
+      console.log('join');
       window.location.href = `chat.html?name=${name.value}&room=${room.value}`;
     }
   });
