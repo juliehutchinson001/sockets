@@ -1,7 +1,9 @@
 const socketIO = require('socket.io');
 const server = require('./app');
 const { generateMessage } = require('./utils/generate_message');
-const { generateLocationMessage } = require('./utils/generate_location_message');
+const {
+  generateLocationMessage,
+} = require('./utils/generate_location_message');
 const { isRealString } = require('./utils/validation');
 const { Users } = require('./utils/users');
 // const { person } = require('./utils/person');
@@ -27,13 +29,19 @@ io.on('connection', socket => {
     // socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
     socket.broadcast
       .to(params.room)
-      .emit('newMessage', generateMessage('Admin', `${params.name} has joined.`));
+      .emit(
+        'newMessage',
+        generateMessage('Admin', `${params.name} has joined.`)
+      );
 
     callback();
   });
 
   // server emitting a message to a specific client
-  io.emit('newUserMessage', generateMessage('Admin', 'Welcome to the chat app!'));
+  io.emit(
+    'newUserMessage',
+    generateMessage('Admin', 'Welcome to the chat app!')
+  );
 
   // server transmitting a message to all clients except the one who caused this action
   socket.broadcast.emit(
@@ -47,7 +55,10 @@ io.on('connection', socket => {
     io.emit('newMessage', generateMessage(message.sender, message.text));
 
     if (user && isRealString(message.text)) {
-      io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
+      io.to(user.room).emit(
+        'newMessage',
+        generateMessage(user.name, message.text)
+      );
     }
 
     // this is the cb that assures the client that the server got the message
@@ -77,9 +88,14 @@ io.on('connection', socket => {
     console.log('client disconnected');
     if (user) {
       io.to(user.room).emit('updateUserList', users.getUserList(user.room));
-      io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left.`));
+      io.to(user.room).emit(
+        'newMessage',
+        generateMessage('Admin', `${user.name} has left.`)
+      );
     }
   });
 });
 
-server.listen(port, () => console.log(`Server listening on port ${port}`));
+server.listen(process.env.PORT, () =>
+  console.log(`Server listening on port ${port}`)
+);
