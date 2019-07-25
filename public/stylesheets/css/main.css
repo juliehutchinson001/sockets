@@ -41,14 +41,16 @@
   align-items: center;
 }
 
-label {
+.login-label__name,
+.login-label__room {
   margin: 20px 0 7px 0;
   width: 100%;
   text-align: left;
   font-weight: 400;
 }
 
-input[type=text] {
+.login-input__name,
+.login-input__room {
   background-color: #F7FAFC;
 
   width: 100%;
@@ -60,7 +62,8 @@ input[type=text] {
   border-radius: 0.5rem;
 }
 
-input[type=submit] {
+
+.login-input__submit {
   background-color: #39687F;
   color: #F2F5F8;
   border-color: transparent;
@@ -76,13 +79,15 @@ input[type=submit] {
   font-size: 15px;
 }
 
-input::placeholder {
+.login-input__name::placeholder,
+.login-input__room::placeholder {
   color: #b4b6b8;
   font-size: 14px;
   font-weight: 400;
 }
 
-input:focus {
+.login-input__name:focus,
+.login-input__room:focus {
   outline-color: #44677D;
 }
 
