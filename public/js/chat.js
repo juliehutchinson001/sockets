@@ -79,7 +79,6 @@ socket.on('connect', () => {
 socket.on('newLocationMessage', message => {
   const li = newLocationLinkElement(message);
   ul.appendChild(li);
-  // scrollToBottom();
 });
 
 socket.on('newUserMessage', message => {
