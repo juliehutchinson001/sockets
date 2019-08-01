@@ -68,6 +68,10 @@ const sendToServer = newMessage => {
   );
 };
 
+socket.on('updateUserList', users => {
+  setTimeout(() => addUsersToChatList(users), 1000);
+});
+
 socket.on('connect', () => {
   console.log(`connected to server`);
 });
