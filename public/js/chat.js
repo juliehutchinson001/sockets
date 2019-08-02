@@ -60,7 +60,7 @@ const sendToServer = newMessage => {
   // the client sends a callback to ask the server confirmation about receiving a new message
   socket.emit(
     'createMessage',
-    { sender: 'User', text: newMessage },
+    { id: JSON.parse(localStorage.getItem('user')).id, text: newMessage },
     (sender, data) => {
       inputVal.value = '';
       console.log(`${data} by ${sender}`);
