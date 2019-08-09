@@ -66,7 +66,6 @@ const sendToServer = newMessage => {
       console.log(`${data} by ${sender}`);
     }
   );
-  console.log(newMessage);
 };
 
 socket.on('connect', () => {
