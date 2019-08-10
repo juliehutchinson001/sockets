@@ -41,6 +41,10 @@ const newLocationLinkElement = message => {
   return li;
 };
 
+/**
+ * Adds all of the users that are active in the chat list
+ * @param {String} users All of the active users in the chat
+ */
 const addUsersToChatList = users => {
   usersInChatWrapper.innerHTML = '';
 
