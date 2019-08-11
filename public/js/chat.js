@@ -41,6 +41,17 @@ const newLocationLinkElement = message => {
   return li;
 };
 
+const addUsersToChatList = users => {
+  usersInChatWrapper.innerHTML = '';
+
+  users.forEach(user => {
+    const newUser = document.createElement('p');
+    newUser.classList.add('chat__room-member');
+    newUser.innerText = user;
+    usersInChatWrapper.appendChild(newUser);
+  });
+};
+
 const sendToServer = newMessage => {
   // the client sends a callback to ask the server confirmation about receiving a new message
   socket.emit(
