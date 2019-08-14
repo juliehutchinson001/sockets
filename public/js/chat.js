@@ -3,6 +3,7 @@ const ul = document.getElementById('messages');
 const messageForm = document.getElementById('message-form');
 const inputVal = document.getElementById('input-message');
 const locationButton = document.getElementById('send-location');
+const usersInChatWrapper = document.getElementById('users');
 
 const getDate = () => {
   const nowDate = new Date();
@@ -61,6 +62,7 @@ const sendToServer = newMessage => {
   socket.emit(
     'createMessage',
     { id: JSON.parse(localStorage.getItem('user')).id, text: newMessage },
+
     (sender, data) => {
       inputVal.value = '';
       console.log(`${data} by ${sender}`);
@@ -100,7 +102,7 @@ socket.on('newEmailToEveryoneBut', message => {
 });
 
 socket.on('newMessage', message => {
-  const li = newMessageElement('User', message.text);
+  const li = newMessageElement(message.sender, message.text);
   li.classList.add('message');
   ul.appendChild(li);
 
