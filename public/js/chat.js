@@ -96,7 +96,6 @@ socket.on('newEmailToEveryoneBut', message => {
   console.log(message);
   setTimeout(() => {
     ul.appendChild(headerAlert);
-    // scrollToBottom();
   }, 1000);
 });
 
@@ -104,7 +103,6 @@ socket.on('newMessage', message => {
   const li = newMessageElement('User', message.text);
   li.classList.add('message');
   ul.appendChild(li);
-  // scrollToBottom();
 
   console.log('new Message: ', message);
 });
